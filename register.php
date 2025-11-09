@@ -30,7 +30,11 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Teléfono</label>
-            <input required name="telefono" class="form-control">
+            <input required type="tel" name="telefono" class="form-control" placeholder="Ej: 3411234567">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">DNI</label>
+            <input required name="dni" class="form-control" placeholder="DNI">
           </div>
           <div class="mb-3">
             <label class="form-label">Contraseña (mín 8)</label>

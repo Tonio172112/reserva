@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
         <li class="nav-item"><a class="nav-link" href="../register.php">REGISTRARSE</a></li>
         <li class="nav-item"><a class="nav-link" href="../reservar.php">RESERVAR</a></li>
         <?php if(!empty($_SESSION['user_id'])): ?>
-          <li class="nav-item"><a class="nav-link" href="../espera.php">MI LISTA</a></li>
+          <li class="nav-item"><a class="nav-link" href="../cursos.php">CURSOS</a></li>
           <li class="nav-item"><a class="nav-link" id="logoutBtn" href="#">CERRAR SESIÓN</a></li>
         <?php else: ?>
           <li class="nav-item"><a class="nav-link" href="../login.php">INICIAR SESIÓN</a></li>
