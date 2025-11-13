@@ -98,13 +98,27 @@
   });
 
   async function deleteCourse(id){
-    if(!confirm('Eliminar curso?')) return;
-    const form = new FormData(); form.append('id',id);
-    const res = await fetch('api/courses.php?action=delete',{method:'POST',body:form});
+    const confirmar = confirm("¿Está seguro de que desea eliminar el curso?\nTodas las reservas serán canceladas y los horarios liberados.");
+    if(!confirmar) return;
+
+    const form = new FormData();
+    form.append('id', id);
+
+    const res = await fetch('api/courses.php?action=delete', {
+        method: 'POST',
+        body: form
+    });
+
     const data = await res.json();
-    if(data.success){ loadCourses(); showMsg('<div class="alert alert-success">Eliminado</div>'); }
-    else showMsg('<div class="alert alert-danger">'+(data.error||'Error')+'</div>');
-  }
+
+    if(data.success){
+        loadCourses();
+        showMsg('<div class="alert alert-success">Curso eliminado correctamente. Todas las reservas fueron canceladas.</div>');
+    }
+    else {
+        showMsg('<div class="alert alert-danger">'+(data.error||"Error al eliminar el curso")+'</div>');
+    }
+}
 
   loadCourses();
   </script>

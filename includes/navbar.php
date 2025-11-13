@@ -16,12 +16,12 @@ if (session_status() === PHP_SESSION_NONE) session_start();
     <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="../index.php">INICIO</a></li>
-        <li class="nav-item"><a class="nav-link" href="../register.php">REGISTRARSE</a></li>
         <li class="nav-item"><a class="nav-link" href="../reservar.php">RESERVAR</a></li>
         <?php if(!empty($_SESSION['user_id'])): ?>
           <li class="nav-item"><a class="nav-link" href="../cursos.php">CURSOS</a></li>
           <li class="nav-item"><a class="nav-link" id="logoutBtn" href="#">CERRAR SESIÓN</a></li>
         <?php else: ?>
+          <li class="nav-item"><a class="nav-link" href="../register.php">REGISTRARSE</a></li>
           <li class="nav-item"><a class="nav-link" href="../login.php">INICIAR SESIÓN</a></li>
         <?php endif; ?>
       </ul>

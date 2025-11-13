@@ -90,20 +90,26 @@ if($action === 'create'){
     $id = intval($_POST['id'] ?? 0);
     if(!$id) json_response(['error'=>'ID inválido']);
     $stmt = $mysqli->prepare('SELECT id_horario FROM reserva WHERE id_reserva = ? AND id_usuario = ?');
-    $stmt->bind_param('ii',$id,$_SESSION['user_id']);
+    $stmt->bind_param('ii', $id, $_SESSION['user_id']);
     $stmt->execute();
     $stmt->bind_result($id_horario);
-    if(!$stmt->fetch()){ $stmt->close(); json_response(['error'=>'Reserva no encontrada']); }
+    if(!$stmt->fetch()){ 
+        $stmt->close(); 
+        json_response(['error'=>'Reserva no encontrada']); 
+    }
     $stmt->close();
     $stmt = $mysqli->prepare('DELETE FROM reserva WHERE id_reserva = ?');
-    $stmt->bind_param('i',$id);
-    $stmt->execute(); $stmt->close();
-    if($id_horario){
+    $stmt->bind_param('i', $id);
+    $ok = $stmt->execute();
+    $stmt->close();
+    if($ok && $id_horario){
         $stmt = $mysqli->prepare('UPDATE horariodisponible SET disponible = 1 WHERE id_horario = ?');
-        $stmt->bind_param('i',$id_horario);
-        $stmt->execute(); $stmt->close();
+        $stmt->bind_param('i', $id_horario);
+        $stmt->execute();
+        $stmt->close();
     }
-    json_response(['success'=>true]);
+    if($ok) json_response(['success'=>true]);
+    else json_response(['error'=>'No se pudo cancelar la reserva']);
 
 
 } elseif($action === 'update'){
