@@ -1,5 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
+// Navbar que se reutiliza en todas las páginas
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
