@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2025 a las 00:25:03
+-- Tiempo de generación: 14-11-2025 a las 01:15:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,7 +42,8 @@ CREATE TABLE `clientes` (
 INSERT INTO `clientes` (`id_cliente`, `dni`, `nombre`, `apellido`, `telefono`) VALUES
 (1, 47433502, 'Antonio', 'Vinazza', '01145687041'),
 (2, 474335022, 'Antonio', 'Vinazza', '01145687041'),
-(3, 47433501, 'Marco', 'Caputo', '1132410364');
+(3, 47433501, 'Marco', 'Caputo', '1132410364'),
+(4, 47433500, 'Luca', 'Fontan', '1324514586');
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,9 @@ CREATE TABLE `cursos` (
 --
 
 INSERT INTO `cursos` (`id_curso`, `id_cliente`, `descripcion`, `titulo`) VALUES
-(3, 3, 'LOL', 'Curso de seduccion de travestis');
+(3, 3, 'LOL', 'Curso de seduccion de travestis'),
+(6, 1, '123', 'Curso de seduccion de travestis'),
+(8, 4, 'asfdasf', 'soy luca fontan');
 
 -- --------------------------------------------------------
 
@@ -84,7 +87,7 @@ CREATE TABLE `horariodisponible` (
 --
 
 INSERT INTO `horariodisponible` (`id_horario`, `dia`, `fecha`, `hora_inicio`, `hora_fin`, `disponible`) VALUES
-(6, 'sábado', '2025-11-15', '09:00:00', '12:00:00', 1),
+(6, 'sábado', '2025-11-15', '09:00:00', '12:00:00', 0),
 (7, 'domingo', '2025-11-16', '09:00:00', '12:00:00', 1),
 (8, 'sábado', '2025-11-22', '09:00:00', '12:00:00', 1),
 (9, 'domingo', '2025-11-23', '09:00:00', '12:00:00', 1),
@@ -129,6 +132,13 @@ CREATE TABLE `reserva` (
   `creado_en` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`id_reserva`, `id_horario`, `id_curso`, `id_usuario`, `fecha_reserva`, `hora_inicio`, `hora_fin`, `estado`, `creado_en`) VALUES
+(26, 6, 3, 5, '2025-11-15', '09:00:00', '12:00:00', 'confirmada', '2025-11-13 23:32:37');
+
 -- --------------------------------------------------------
 
 --
@@ -153,7 +163,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id_usuario`, `email`, `password_hash`, `nombre`, `apellido`, `telefono`, `creado_en`, `id_cliente`) VALUES
 (3, 'toniomurruga@gmail.com', '$2y$10$tmV8yBLWU12F/wNrIzx7vuQb.P3ae2fEf1sQTjqT19vcbmuoNTiV6', 'Antonio', 'Vinazza', '01145687041', '2025-11-09 19:10:24', 1),
 (4, 'toniomurruga2@gmail.com', '$2y$10$30XN8I4vRNSTnyoqrYOtH.DlP7DcDzqZYuXOR/IdtgqkRAw/CSE.W', 'Antonio', 'Vinazza', '01145687041', '2025-11-09 19:10:50', 2),
-(5, 'marco@gmail.com', '$2y$10$/VOP067EYHsa11xdfX/H7.mXCH8.OOZJF8FR0MJrHNlJ2./pcNN0O', 'Marco', 'Caputo', '1132410364', '2025-11-09 19:52:47', 3);
+(5, 'marco@gmail.com', '$2y$10$/VOP067EYHsa11xdfX/H7.mXCH8.OOZJF8FR0MJrHNlJ2./pcNN0O', 'Marco', 'Caputo', '1132410364', '2025-11-09 19:52:47', 3),
+(6, 'luca@gmail.com', '$2y$10$SIgVg9Iq1tjZzjcruyUxHukj.5gKi.MmZ50CGmiY83i47MqUrCTem', 'Luca', 'Fontan', '1324514586', '2025-11-13 23:53:28', 4);
 
 --
 -- Índices para tablas volcadas
@@ -213,13 +224,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cliente` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id_curso` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_curso` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `horariodisponible`
@@ -237,13 +248,13 @@ ALTER TABLE `lista_espera`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_reserva` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
